@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agri-AI Crop Yield & Disease Detection</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c7a3b; text-align: center; }
+        .section { margin-top: 30px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 6px; background: #fafafa; }
+        h2 { color: #444; font-size: 1.2rem; }
+        input[type="file"], input[type="number"], select { width: 100%; padding: 10px; margin-top: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: #2c7a3b; color: white; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 4px; cursor: pointer; width: 100%; }
+        button:hover { background: #235e2f; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Agri-AI Smart Farming System</h1>
+        
+        <!-- Disease Detection Section -->
+        <div class="section">
+            <h2>1. Crop Leaf Disease Detection</h2>
+            <form action="/predict-disease" method="POST" enctype="multipart/form-data">
+                <label for="leaf_image">Upload Leaf Image:</label>
+                <input type="file" name="leaf_image" id="leaf_image" accept="image/*" required>
+                <button type="submit">Detect Disease</button>
+            </form>
+        </div>
+
+        <!-- Yield Forecasting Section -->
+        <div class="section">
+            <h2>2. Crop Yield Forecasting</h2>
+            <label for="rainfall">Average Rainfall (mm):</label>
+<input type="number" step="any" name="rainfall" id="rainfall" placeholder="e.g., 1200" value="{{ request.form.get('rainfall', '') }}" required>
+
+<label for="temperature">Average Temperature (°C):</label>
+<input type="number" step="any" name="temperature" id="temperature" placeholder="e.g., 28" value="{{ request.form.get('temperature', '') }}" required>
+ <button type="submit">Forecast Yield</button>
+</form>
+
+{% if yield_result %}
+<div class="result-box" style="margin-top: 15px; padding: 10px; background: #e8f5e9; color: #2e7d32; border-radius: 5px; font-weight: bold;">
+    {{ yield_result }}
+</div>
+{% endif %}               
+                <button type="submit">Forecast Yield</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
