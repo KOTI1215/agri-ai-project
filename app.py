@@ -25,7 +25,6 @@ def weather():
         if response.status_code == 200:
             weather_data = response.json()
         else:
-            # Fallback to nearest district headquarters if village isn't in API database
             fallback_url = f"https://api.openweathermap.org/data/2.5/weather?q=Vizianagaram,IN&appid={api_key}&units=metric"
             fallback_resp = requests.get(fallback_url, timeout=5)
             if fallback_resp.status_code == 200:
@@ -90,6 +89,39 @@ def fertilizer():
             recommendation = "Nitrogen (N): 100 kg/ha, Phosphorus (P): 50 kg/ha, Potassium (P2O5): 50 kg/ha. Use balanced fertilizers."
             
     return render_template('fertilizer.html', recommendation=recommendation, crop=crop, soil=soil)
+
+@app.route('/advisory', methods=['GET', 'POST'])
+def advisory():
+    crop = "Paddy"
+    temp = 30
+    humidity = 75
+    alert = "Low risk of pest outbreak. Normal crop monitoring advised."
+    
+    if request.method == 'POST':
+        crop = request.form.get('crop', 'Paddy')
+        try:
+            temp = float(request.form.get('temp', 30))
+            humidity = float(request.form.get('humidity', 75))
+        except ValueError:
+            pass
+        
+        if crop == 'Paddy':
+            if humidity > 80 and temp > 28:
+                alert = "⚠ HIGH ALERT: High humidity & warm temperature detected! High risk of **Blast Disease** and **Brown Planthopper**. Recommended action: Apply tricyclazole or drain excess water."
+            else:
+                alert = "✅ Conditions are stable for Paddy. Maintain standard irrigation."
+        elif crop == 'Maize':
+            if temp > 32 and humidity < 60:
+                alert = "⚠️ HIGH ALERT: Dry heat detected! Risk of **Fall Armyworm** infestation. Recommended action: Inspect whorls and apply recommended neem-based pesticides."
+            else:
+                alert = "✅ Maize crop conditions look favorable."
+        else:
+            if humidity > 85:
+                alert = "⚠️ HIGH ALERT: Excess moisture! Risk of fungal root rot. Ensure proper field drainage."
+            else:
+                alert = "✅ General crop health is good."
+                
+    return render_template('advisory.html', crop=crop, temp=temp, humidity=humidity, alert=alert)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

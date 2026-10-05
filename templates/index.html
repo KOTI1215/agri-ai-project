@@ -6,38 +6,37 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body class="bg-light p-5">
-    <div class="container" style="max-width: 800px;">
-        <div class="text-center mb-5">
-            <h1 class="display-5 fw-bold text-success">🌱 Agri-AI Smart Farming System</h1>
-            <p class="lead text-muted">Your intelligent companion for crop monitoring, weather analysis, and smart irrigation.</p>
-        </div>
-
-        <!-- Navigation Hub Cards -->
+    <div class="container text-center" style="max-width: 800px;">
+        <h1 class="text-success mb-3">🌱 Agri-AI Smart Farming System</h1>
+        <p class="lead text-secondary mb-5">Empowering farmers with weather intelligence, yield predictions, fertilizer guides, and pest advisories.</p>
+        
         <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm p-3 h-100">
-                    <h5>Live Weather</h5>
-                    <p class="text-muted small">Current conditions & pest/irrigation alerts.</p>
-                    <form action="/weather" method="POST" class="mt-auto">
-                        <input type="text" name="city" class="form-control form-control-sm mb-2" placeholder="City name..." required>
-                        <button class="btn btn-success btn-sm w-100" type="submit">Open</button>
-                    </form>
+            <div class="col-md-6">
+                <div class="card shadow-sm p-4 h-100">
+                    <h3 class="text-primary">🌤️ Live Weather</h3>
+                    <p class="text-muted">Check real-time weather and village search lookups.</p>
+                    <a href="/weather" class="btn btn-primary mt-auto">Open Weather Tool</a>
                 </div>
             </div>
-            
-            <div class="col-md-4">
-                <div class="card shadow-sm p-3 h-100">
-                    <h5>Forecast & Yield</h5>
-                    <p class="text-muted small">5-day trends & yield calculations.</p>
-                    <a href="/forecast" class="btn btn-primary btn-sm w-100 mt-auto">Open Hub</a>
+            <div class="col-md-6">
+                <div class="card shadow-sm p-4 h-100">
+                    <h3 class="text-success">📈 5-Day Forecast & Yield</h3>
+                    <p class="text-muted">Multi-day trends and estimated crop yield analytics.</p>
+                    <a href="/forecast" class="btn btn-success mt-auto">Open Forecast Tool</a>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm p-3 h-100">
-                    <h5>Fertilizer Tool</h5>
-                    <p class="text-muted small">Tailored NPK nutrient guidelines.</p>
-                    <a href="/fertilizer" class="btn btn-success btn-sm w-100 mt-auto">Open Tool</a>
+            <div class="col-md-6">
+                <div class="card shadow-sm p-4 h-100">
+                    <h3 class="text-warning text-dark">🧪 Fertilizer Advisor</h3>
+                    <p class="text-muted">Get precise NPK fertilizer ratios based on crop and soil.</p>
+                    <a href="/fertilizer" class="btn btn-warning mt-auto">Open Fertilizer Tool</a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm p-4 h-100">
+                    <h3 class="text-danger">🛡️ Pest & Disease Alert</h3>
+                    <p class="text-muted">Automated risk analysis based on temperature & humidity.</p>
+                    <a href="/advisory" class="btn btn-danger mt-auto">Open Pest Advisory</a>
                 </div>
             </div>
         </div>

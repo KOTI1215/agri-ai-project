@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Agri-AI Pest & Disease Advisory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light p-5">
+    <div class="container" style="max-width: 700px;">
+        <h1 class="mb-4 text-success">🛡️ Smart Pest & Disease Advisory</h1>
+        
+        <form action="/advisory" method="POST" class="card shadow-sm p-4 mb-4">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Select Crop</label>
+                <select name="crop" class="form-select">
+                    <option value="Paddy" {% if crop == 'Paddy' %}selected{% endif %}>Paddy (Rice)</option>
+                    <option value="Maize" {% if crop == 'Maize' %}selected{% endif %}>Maize</option>
+                    <option value="Cotton" {% if crop == 'Cotton' %}selected{% endif %}>Cotton</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Temperature (°C)</label>
+                    <input type="number" step="0.1" name="temp" class="form-control" value="{{ temp }}">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Humidity (%)</label>
+                    <input type="number" step="0.1" name="humidity" class="form-control" value="{{ humidity }}">
+                </div>
+            </div>
+            <button class="btn btn-success w-100" type="submit">Check Pest Risk</button>
+        </form>
+
+        <div class="card shadow p-4 mb-4 bg-white border-success">
+            <h3 class="text-success mb-3">📋 Advisory Report for {{ crop }}</h3>
+            <p class="fs-5 mb-0 p-3 rounded bg-light border"><strong>{{ alert | safe }}</strong></p>
+        </div>
+
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</body>
+</html>
