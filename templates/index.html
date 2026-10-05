@@ -6,19 +6,40 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body class="bg-light p-5">
-    <div class="container" style="max-width: 700px;">
+    <div class="container" style="max-width: 800px;">
         <div class="text-center mb-5">
             <h1 class="display-5 fw-bold text-success">🌱 Agri-AI Smart Farming System</h1>
             <p class="lead text-muted">Your intelligent companion for crop monitoring, weather analysis, and smart irrigation.</p>
         </div>
 
-        <!-- City Weather Search Box -->
-        <div class="card shadow-sm p-4 mb-4">
-            <h3>Check Live Weather & Farm Advisory</h3>
-            <form action="/weather" method="POST" class="input-group mt-3">
-                <input type="text" name="city" class="form-control" placeholder="Enter any city name (e.g. Srikakulam)..." required>
-                <button class="btn btn-success" type="submit">Get Weather</button>
-            </form>
+        <!-- Navigation Hub Cards -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5>Live Weather</h5>
+                    <p class="text-muted small">Current conditions & pest/irrigation alerts.</p>
+                    <form action="/weather" method="POST" class="mt-auto">
+                        <input type="text" name="city" class="form-control form-control-sm mb-2" placeholder="City name..." required>
+                        <button class="btn btn-success btn-sm w-100" type="submit">Open</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5>Forecast & Yield</h5>
+                    <p class="text-muted small">5-day trends & yield calculations.</p>
+                    <a href="/forecast" class="btn btn-primary btn-sm w-100 mt-auto">Open Hub</a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm p-3 h-100">
+                    <h5>Fertilizer Tool</h5>
+                    <p class="text-muted small">Tailored NPK nutrient guidelines.</p>
+                    <a href="/fertilizer" class="btn btn-success btn-sm w-100 mt-auto">Open Tool</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
