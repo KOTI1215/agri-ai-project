@@ -15,7 +15,7 @@ def weather():
         city = request.args.get('city', 'Vizianagaram')
         
     api_key = "ed74c3c9c0a6178094737c755b201224"
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city},IN&appid={api_key}&units=metric"
     
     weather_data = None
     error_message = None
@@ -25,7 +25,14 @@ def weather():
         if response.status_code == 200:
             weather_data = response.json()
         else:
-            error_message = f"Could not find weather data for '{city}'."
+            # Fallback to nearest district headquarters if village isn't in API database
+            fallback_url = f"https://api.openweathermap.org/data/2.5/weather?q=Vizianagaram,IN&appid={api_key}&units=metric"
+            fallback_resp = requests.get(fallback_url, timeout=5)
+            if fallback_resp.status_code == 200:
+                weather_data = fallback_resp.json()
+                error_message = f"Village '{city}' not found directly. Showing weather for nearby Vizianagaram district hub."
+            else:
+                error_message = f"Could not find weather data for '{city}'."
     except Exception as e:
         error_message = "Network error: Unable to connect to OpenWeather map."
 
@@ -41,7 +48,7 @@ def forecast():
         crop = request.args.get('crop', 'Paddy')
         
     api_key = "ed74c3c9c0a6178094737c755b201224"
-    url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric"
+    url = f"https://api.openweathermap.org/data/2.5/forecast?q={city},IN&appid={api_key}&units=metric"
     
     forecast_data = None
     error_message = None
