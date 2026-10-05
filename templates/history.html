@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scan History Log</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light p-5">
+    <div class="container" style="max-width: 900px;">
+        <h1 class="mb-4 text-primary">📊 Database Scan History Log</h1>
+        <p class="text-muted">Review all past AI crop disease scans stored securely in SQLite.</p>
+
+        {% if scans %}
+            <div class="list-group mb-4">
+                {% for scan in scans %}
+                <div class="list-group-item list-group-item-action p-4 mb-3 shadow-sm rounded border">
+                    <div class="d-flex w-100 justify-content-between mb-2">
+                        <h5 class="text-success mb-1">📁 Image: {{ scan[0] }}</h5>
+                        <small class="text-muted">🕒 {{ scan[2] }}</small>
+                    </div>
+                    <p class="mb-1 fs-6"><strong>Result:</strong> {{ scan[1] | safe }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                No scan history found in the database yet. Try uploading a leaf image in the Disease Scanner!
+            </div>
+        {% endif %}
+
+        <a href="/" class="btn btn-secondary">Back to Home</a>
+    </div>
+</body>
+</html>
